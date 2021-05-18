@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -15,7 +17,7 @@ module.exports = {
         hot: true
     },
     module: {
-        rules: [
+        rules: [    
             {
                 test: /\.js$/,
                 use: 'babel-loader'
@@ -35,6 +37,16 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            // title: '捡代码的小女孩的webpack世界',
+            // filename: 'yeah.html',
+            // meta: {viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'},
+            // favicon: './src/imgs/favicon.ico',
+            // scriptLoading: 'blocking',
+            // minify: false
+            template: path.join(__dirname, 'src/index.html')
+        }),
         new webpack.HotModuleReplacementPlugin()
     ]   
 }
